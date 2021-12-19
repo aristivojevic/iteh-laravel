@@ -58,7 +58,7 @@ class PlayerGameController extends Controller
 
         $playerGame = new PlayerGame();
 
-        $playerGame->player_id = $request->player->id;
+        $playerGame->player_id = $request->player_id;
         $playerGame->game_id = $request->game_id;
 
         $playerGame->save();
@@ -123,7 +123,7 @@ class PlayerGameController extends Controller
             ], 400);
         }
 
-        $playerGame->player_id = $request->player->id;
+        $playerGame->player_id = $request->player_id;
         $playerGame->game_id = $request->game_id;
         $playerGame->save();
 

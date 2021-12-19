@@ -21,13 +21,13 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/players', [PlayerController::class, 'index']);
 Route::get('/games', [GameController::class, 'index']);
+Route::get('/player-games', [PlayerGameController::class, 'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/logout', [UserController::class, 'logout']);
 
-    Route::get('/player-games', [PlayerGameController::class, 'index']);
     Route::post('/player-games', [PlayerGameController::class, 'store']);
-    Route::get('/player-games/{player-game}', [PlayerGameController::class, 'show']);
-    Route::put('/player-games/{player-game}', [PlayerGameController::class, 'update']);
-    Route::delete('/player-games/{player-game}', [PlayerGameController::class, 'destroy']);
+    Route::get('/player-games/{player}', [PlayerGameController::class, 'show']);
+    Route::put('/player-games/{player}', [PlayerGameController::class, 'update']);
+    Route::delete('/player-games/{player}', [PlayerGameController::class, 'destroy']);
 });
