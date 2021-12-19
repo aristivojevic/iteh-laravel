@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\PlayerGameController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [UserController::class, 'login']);
+Route::get('/players', [PlayerController::class, 'index']);
+Route::get('/games', [GameController::class, 'index']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::post('/logout', [UserController::class, 'logout']);
+
+    Route::get('/player-games', [PlayerGameController::class, 'index']);
+    Route::post('/player-games', [PlayerGameController::class, 'store']);
+    Route::get('/player-games/{player-game}', [PlayerGameController::class, 'show']);
+    Route::put('/player-games/{player-game}', [PlayerGameController::class, 'update']);
+    Route::delete('/player-games/{player-game}', [PlayerGameController::class, 'destroy']);
 });
